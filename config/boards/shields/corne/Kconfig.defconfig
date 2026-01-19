@@ -19,15 +19,15 @@ if SHIELD_CORNE_LEFT || SHIELD_CORNE_RIGHT
 config ZMK_SPLIT
     default y
 
-if ZMK_DISPLAY
+if ZMK_BACKLIGHT
 
-config I2C
+config PWM
     default y
 
-config SSD1306
+config LED_PWM
     default y
 
-endif # ZMK_DISPLAY
+endif # ZMK_BACKLIGHT
 
 if LVGL
 
