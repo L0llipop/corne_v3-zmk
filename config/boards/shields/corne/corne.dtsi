@@ -66,15 +66,31 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6)  RC(2,7) RC(2,8) RC(2,9
 };
 
 &pinctrl {
+    /* Состояния для SPI (RGB Underglow) */
     spi3_default: spi3_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>; // Пин для RGB ленты (Data)
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
         };
     };
 
+    spi3_sleep: spi3_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
+            low-power-enable;
+        };
+    };
+
+    /* Состояния для PWM (Backlight) */
     pwm0_default: pwm0_default {
         group1 {
-            psels = <NRF_PSEL(PWM_OUT0, 1, 13)>; // Пин управления Backlight
+            psels = <NRF_PSEL(PWM_OUT0, 1, 13)>;
+        };
+    };
+
+    pwm0_sleep: pwm0_sleep {
+        group1 {
+            psels = <NRF_PSEL(PWM_OUT0, 1, 13)>;
+            low-power-enable;
         };
     };
 };
@@ -83,13 +99,14 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6)  RC(2,7) RC(2,8) RC(2,9
     compatible = "nordic,nrf-spim";
     status = "okay";
     pinctrl-0 = <&spi3_default>;
-    pinctrl-names = "default";
+    pinctrl-1 = <&spi3_sleep>;          
+    pinctrl-names = "default", "sleep"; 
 
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
         reg = <0>;
         spi-max-frequency = <4000000>;
-        chain-length = <27>; /* Укажите точное кол-во ваших RGB диодов */
+        chain-length = <27>;
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
@@ -99,5 +116,6 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6)  RC(2,7) RC(2,8) RC(2,9
 &pwm0 {
     status = "okay";
     pinctrl-0 = <&pwm0_default>;
-    pinctrl-names = "default";
+    pinctrl-1 = <&pwm0_sleep>;          
+    pinctrl-names = "default", "sleep";
 };
