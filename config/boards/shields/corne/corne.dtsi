@@ -8,10 +8,12 @@
         zmk,matrix-transform = &default_transform;
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
+        /* Указываем ZMK Studio, какую раскладку использовать */
+        zmk,physical-layout = &physical_layout0;
     };
 
-    /* Добавляем это, чтобы Studio знала физическое расположение клавиш */
-    default_layout: layout {
+    /* Этот блок ОБЯЗАТЕЛЕН для ZMK Studio */
+    physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
