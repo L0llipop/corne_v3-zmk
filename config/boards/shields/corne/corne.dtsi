@@ -1,4 +1,7 @@
 #include <dt-bindings/led/led.h>
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/zmk/outputs.h>
+
 
 / {
     chosen {
@@ -12,31 +15,21 @@
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
         wakeup-source;
-
         row-gpios
             = <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
-
-        col-gpios
-            = <&pro_micro 21 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 20 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 19 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 18 GPIO_ACTIVE_HIGH> // R, F, V
-            , <&pro_micro 15 GPIO_ACTIVE_HIGH>
-            , <&pro_micro 14 GPIO_ACTIVE_HIGH>
-            ;
     };
 
     backlight: pwmleds {
         compatible = "pwm-leds";
         pwm_led_0 {
-            pwms = <&pwm0 0 PWM_MSEC(10) PWM_POLARITY_NORMAL>;
+            pwms = <&pwm0 0 10000000 PWM_POLARITY_NORMAL>;
         };
     };
-};
+}; 
 
 &pinctrl {
     spi3_default: spi3_default {
@@ -89,4 +82,4 @@
     pinctrl-0 = <&pwm0_default>;
     pinctrl-1 = <&pwm0_sleep>;
     pinctrl-names = "default", "sleep";
-};z
+};
