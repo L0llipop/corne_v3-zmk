@@ -4,11 +4,11 @@ name: CORNE
 type: shield
 url: https://github.com/Bastardkb/TBK-Mini
 requires: [Nice!Nano]
-exposes: [i2c_oled]
+exposes: []
 features:
   - keys
-  - display
   - underglow
+  - backlight
 siblings:
   - corne_left
   - corne_right
