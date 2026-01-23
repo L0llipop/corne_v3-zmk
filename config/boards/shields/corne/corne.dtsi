@@ -1,3 +1,5 @@
+#include <dt-bindings/led/led.h>
+
 / {
     chosen {
         zmk,kscan = &kscan0;
@@ -39,7 +41,7 @@
 &pinctrl {
     spi3_default: spi3_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>; // RGB пин P0.06
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
         };
     };
 
@@ -52,7 +54,7 @@
 
     pwm0_default: pwm0_default {
         group1 {
-            psels = <NRF_PSEL(PWM_OUT0, 1, 13)>; // Backlight пин P1.13
+            psels = <NRF_PSEL(PWM_OUT0, 1, 13)>;
         };
     };
 
@@ -87,4 +89,4 @@
     pinctrl-0 = <&pwm0_default>;
     pinctrl-1 = <&pwm0_sleep>;
     pinctrl-names = "default", "sleep";
-};
+};z
